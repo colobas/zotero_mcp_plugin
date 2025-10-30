@@ -6,9 +6,6 @@
 // prettier-ignore
 declare namespace _ZoteroTypes {
   interface Prefs {
-    PluginPrefsMap: {
-      "enable": boolean;
-      "input": string;
-    };
+    PluginPrefsMap: Record<string, unknown>;
   }
 }

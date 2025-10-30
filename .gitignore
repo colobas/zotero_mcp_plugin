@@ -14,3 +14,7 @@ tsconfig.tsbuildinfo
 .scaffold
 build
 logs
+
+# Beads issue tracker
+.beads/*
+!.beads/issues.jsonl

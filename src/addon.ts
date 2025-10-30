@@ -1,7 +1,26 @@
 import { config } from "../package.json";
-import { ColumnOptions, DialogHelper } from "zotero-plugin-toolkit";
 import hooks from "./hooks";
 import { createZToolkit } from "./utils/ztoolkit";
+
+type LocalizationMessageAttribute = {
+  name: string;
+  value: string;
+};
+
+type LocalizationMessage = {
+  value?: string;
+  attributes?: LocalizationMessageAttribute[];
+};
+
+type LocalizationWrapper = {
+  formatMessagesSync(
+    messages: Array<{ id: string; args?: Record<string, unknown> }>,
+  ): LocalizationMessage[];
+};
+
+export type LocaleData = {
+  current: LocalizationWrapper;
+};
 
 class Addon {
   public data: {
@@ -9,17 +28,9 @@ class Addon {
     config: typeof config;
     // Env type, see build.js
     env: "development" | "production";
-    initialized?: boolean;
+    initialized: boolean;
     ztoolkit: ZToolkit;
-    locale?: {
-      current: any;
-    };
-    prefs?: {
-      window: Window;
-      columns: Array<ColumnOptions>;
-      rows: Array<{ [dataKey: string]: string }>;
-    };
-    dialog?: DialogHelper;
+    locale?: LocaleData;
   };
   // Lifecycle hooks
   public hooks: typeof hooks;

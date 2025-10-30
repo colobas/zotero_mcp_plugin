@@ -1,5 +1,6 @@
 import { config } from "../../package.json";
 import { FluentMessageId } from "../../typings/i10n";
+import type { LocaleData } from "../addon";
 
 export { initLocale, getString, getLocaleID };
 
@@ -11,7 +12,7 @@ function initLocale() {
     typeof Localization === "undefined"
       ? ztoolkit.getGlobal("Localization")
       : Localization
-  )([`${config.addonRef}-addon.ftl`], true);
+  )([`${config.addonRef}-addon.ftl`], true) as LocaleData["current"];
   addon.data.locale = {
     current: l10n,
   };
@@ -73,12 +74,10 @@ function _getString(
     return localStringWithPrefix;
   }
   if (branch && pattern.attributes) {
-    for (const attr of pattern.attributes) {
-      if (attr.name === branch) {
-        return attr.value;
-      }
-    }
-    return pattern.attributes[branch] || localStringWithPrefix;
+    const attribute = pattern.attributes.find(
+      (attr) => attr.name === branch,
+    );
+    return attribute?.value ?? localStringWithPrefix;
   } else {
     return pattern.value || localStringWithPrefix;
   }
