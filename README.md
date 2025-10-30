@@ -10,12 +10,6 @@ This repository started from the canonical Zotero plugin template, but the templ
 - Provide a lightweight communication shim so LLMs can attach to the running Zotero MCP server.
 - Keep the UI surface minimal—most interaction should happen through MCP tool calls rather than extra Zotero menus.
 
-## Development Plan
-
-1. Stand up the MCP runtime inside the plugin sandbox using `@modelcontextprotocol/sdk`, including lifecycle management tied to Zotero startup and shutdown.
-2. Implement core Zotero tools (list open tabs, search items, search collections/subcollections) with parameter validation and expressive responses.
-3. Add configuration and diagnostics (preferences, logging, health checks) so the bridge can be monitored and tuned from both Zotero and MCP clients.
-
 ## Repository Layout
 
 - `src/` – TypeScript source for the plugin, including the MCP runtime scaffolding.
